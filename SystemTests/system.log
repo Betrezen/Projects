@@ -1,0 +1,5 @@
+                          name   Total Failed Errored Passed Time
+              test_example1.py      2      0       0      2     0s
+              test_example2.py      2      0       0      2     5s
+              test_example3.py      2      0       0      2     6s
+Tests: 3 Total: 6 Failed: 0, Errored: 0, Passed: 6, testtime: 11s, runtime: 7s

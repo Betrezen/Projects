@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<traffic-notify-query>
+    <traffic-record-identifier value="821-1309974603.5565-vnav_android-USA-NAVTEQ">
+        <nav-progress session-id="821-1309974603.5565-vnav_android-USA-NAVTEQ" position="13" state="start" route-id="|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|"></nav-progress>
+    </traffic-record-identifier>
+    <cache-contents>
+        <cache-item name="maz-186322"></cache-item>
+        <cache-item name="maz-1951863"></cache-item>
+        <pair value="female-1-amr-v3" key="pronun-style"></pair>
+    </cache-contents>
+</traffic-notify-query>

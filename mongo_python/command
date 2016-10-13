@@ -1,0 +1,35 @@
+------------INSTALL----------------
+sudo yum install pymongo
+
+OR
+vshaynyak@dev12 ~ $ scp -r pymongo/ bson/ /usr/lib/python2.4/site-packages/
+cp: cannot create directory `/usr/lib/python2.4/site-packages/pymongo': Permission denied
+cp: cannot create directory `/usr/lib/python2.4/site-packages/bson': Permission denied
+vshaynyak@dev12 ~ $ sudo scp -r pymongo/ bson/ /usr/lib/python2.4/site-packages/
+
+--------------RUN------------------
+bin/mongod --dbpath db
+mongod - service   db it is path to database. here is used relative path!
+
+--------------USING----------------
+vshaynyak@dev12 ~ $ python
+Python 2.4.3 (#1, Nov  3 2010, 12:52:40)
+[GCC 4.1.2 20080704 (Red Hat 4.1.2-48)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import pymongo
+>>> from pymongo import Connection
+>>> c = Connection()
+
+
+>>> from public_transit_layers import PoitsLayerMongoDB
+>>> plmd = PoitsLayerMongoDB()
+>>> plmd.create()
+>>> value={'unique_route_id':1,'shape_id':10,'sequence':0,'route_type':5,'route_color':'FF000032','dist_traveled':0.01,'latlon':[33.943787, -118.408599]}
+>>> plmd.save(value)
+>>> value={'unique_route_id':1,'shape_id':10,'sequence':1,'route_type':5,'route_color':'FF000032','dist_traveled':15.2,'latlon':[33.943887, -118.408699]}
+>>> plmd.save(value)
+>>> value={'unique_route_id':1,'shape_id':10,'sequence':2,'route_type':5,'route_color':'FF000032','dist_traveled':50.2,'latlon':[33.943987, -118.408999]}
+>>> plmd.save(value)
+>>> c = plmd.find_by_latlon([33.943887, -118.408699],10)
+>>> for i in c:
+        print i

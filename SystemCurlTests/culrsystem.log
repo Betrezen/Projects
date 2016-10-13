@@ -1,0 +1,39 @@
+TEST: 3.xml, log: /tmp/tmp_system_3.xml1Hh4vW
+INPUT:curl --http1.0 -b cookie.txt -H 'Content-Type: application/xml' -X POST http://ec2-54-200-187-137.us-west-2.compute.amazonaws.com:7777  -d '<?xml version="1.0" encoding="utf-8"?><traffic-notify-query>    <traffic-record-identifier>        <value>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</value>        <nav-progress>            <session-id>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</session-id>            <position>"13"</position>            <state>"start"</state>            <route-id>|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|</route-id>        </nav-progress>    </traffic-record-identifier>    <cache-contents>        <cache-item a="1">            <name>"maz-186322"</name>        </cache-item>        <cache-item b="2">            <name>"maz-1951863"</name>        </cache-item>        <pair>            <value>"female-1-amr-v3"</value>            <key>pronun-style</key>        </pair>    </cache-contents></traffic-notify-query>' 
+
+OUTPUT:POST / HTTP/1.0
+User-Agent: curl/7.22.0 (x86_64-pc-linux-gnu) libcurl/7.22.0 OpenSSL/1.0.1 zlib/1.2.3.4 libidn/1.23 librtmp/2.3
+Host: ec2-54-200-187-137.us-west-2.compute.amazonaws.com:7777
+Accept: */*
+Content-Type: application/xml
+Content-Length: 805
+
+<?xml version="1.0" encoding="utf-8"?><traffic-notify-query>    <traffic-record-identifier>        <value>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</value>        <nav-progress>            <session-id>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</session-id>            <position>"13"</position>            <state>"start"</state>            <route-id>|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|</route-id>        </nav-progress>    </traffic-record-identifier>    <cache-contents>        <cache-item a="1">            <name>"maz-186322"</name>        </cache-item>        <cache-item b="2">            <name>"maz-1951863"</name>        </cache-item>        <pair>            <value>"female-1-amr-v3"</value>            <key>pronun-style</key>        </pair>    </cache-contents></traffic-notify-query> 
+====================================================================
+
+TEST: 2.xml, log: /tmp/tmp_system_2.xmlpplrdd
+INPUT:curl --http1.0 -b cookie.txt -H 'Content-Type: application/xml' -X POST http://ec2-54-200-187-137.us-west-2.compute.amazonaws.com:7777  -d '<?xml version="1.0" encoding="utf-8"?><traffic-notify-query>    <traffic-record-identifier>        <value>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</value>        <nav-progress>            <session-id>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</session-id>            <position>"13"</position>            <state>"start"</state>            <route-id>|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|</route-id>        </nav-progress>    </traffic-record-identifier>    <cache-contents>        <cache-item>            <name>"maz-186322"</name>        </cache-item>        <cache-item>            <name>"maz-1951863"</name>        </cache-item>        <pair>            <value>"female-1-amr-v3"</value>            <key>pronun-style</key>        </pair>    </cache-contents></traffic-notify-query>' 
+
+OUTPUT:POST / HTTP/1.0
+User-Agent: curl/7.22.0 (x86_64-pc-linux-gnu) libcurl/7.22.0 OpenSSL/1.0.1 zlib/1.2.3.4 libidn/1.23 librtmp/2.3
+Host: ec2-54-200-187-137.us-west-2.compute.amazonaws.com:7777
+Accept: */*
+Content-Type: application/xml
+Content-Length: 793
+
+<?xml version="1.0" encoding="utf-8"?><traffic-notify-query>    <traffic-record-identifier>        <value>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</value>        <nav-progress>            <session-id>"821-1309974603.5565-vnav_android-USA-NAVTEQ"</session-id>            <position>"13"</position>            <state>"start"</state>            <route-id>|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|</route-id>        </nav-progress>    </traffic-record-identifier>    <cache-contents>        <cache-item>            <name>"maz-186322"</name>        </cache-item>        <cache-item>            <name>"maz-1951863"</name>        </cache-item>        <pair>            <value>"female-1-amr-v3"</value>            <key>pronun-style</key>        </pair>    </cache-contents></traffic-notify-query> 
+====================================================================
+
+TEST: 1.xml, log: /tmp/tmp_system_1.xmlCII1F0
+INPUT:curl --http1.0 -b cookie.txt -H 'Content-Type: application/xml' -X POST http://ec2-54-200-187-137.us-west-2.compute.amazonaws.com:7777  -d '<?xml version="1.0" encoding="utf-8"?><traffic-notify-query>    <traffic-record-identifier value="821-1309974603.5565-vnav_android-USA-NAVTEQ">        <nav-progress session-id="821-1309974603.5565-vnav_android-USA-NAVTEQ" position="13" state="start" route-id="|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|"></nav-progress>    </traffic-record-identifier>    <cache-contents>        <cache-item name="maz-186322"></cache-item>        <cache-item name="maz-1951863"></cache-item>        <pair value="female-1-amr-v3" key="pronun-style"></pair>    </cache-contents></traffic-notify-query>' 
+
+OUTPUT:POST / HTTP/1.0
+User-Agent: curl/7.22.0 (x86_64-pc-linux-gnu) libcurl/7.22.0 OpenSSL/1.0.1 zlib/1.2.3.4 libidn/1.23 librtmp/2.3
+Host: ec2-54-200-187-137.us-west-2.compute.amazonaws.com:7777
+Accept: */*
+Content-Type: application/xml
+Content-Length: 582
+
+<?xml version="1.0" encoding="utf-8"?><traffic-notify-query>    <traffic-record-identifier value="821-1309974603.5565-vnav_android-USA-NAVTEQ">        <nav-progress session-id="821-1309974603.5565-vnav_android-USA-NAVTEQ" position="13" state="start" route-id="|BkYx77+9a++/vUIp77+9NgDvv73vv73vv70f77+9|"></nav-progress>    </traffic-record-identifier>    <cache-contents>        <cache-item name="maz-186322"></cache-item>        <cache-item name="maz-1951863"></cache-item>        <pair value="female-1-amr-v3" key="pronun-style"></pair>    </cache-contents></traffic-notify-query> 
+====================================================================
+

@@ -1,0 +1,172 @@
+sudo -u postgres psql mon
+
+mondb:
+    host: dev11
+    port: 5432
+    schema: mon
+    user: monrpt
+    password: markers
+
+
+
+ALTER TABLE accepted_iden_details ALTER COLUMN client_session TYPE BIGINT;
+
+
+mon=> \d accepted_iden_details
+                                           Table "public.accepted_iden_details"
+         Column         |            Type             |                             Modifiers                              
+------------------------+-----------------------------+--------------------------------------------------------------------
+ id                     | bigint                      | not null default nextval('accepted_iden_details_id_seq'::regclass)
+ hostname               | character varying(100)      | not null
+ ctime                  | timestamp without time zone | not null default now()
+ time                   | timestamp without time zone | not null
+ connection_name_hash   | character varying(32)       | 
+ credential             | character varying(40)       | 
+ language               | character varying(10)       | 
+ device                 | character varying(100)      | 
+ mdn                    | character varying(20)       | 
+ legacy_guid            | character varying(64)       | 
+ client_guid            | character varying(64)       | 
+ client_guid_requested  | boolean                     | not null
+ iden_receipt_requested | boolean                     | not null
+ carrier                | character varying(25)       | 
+ firmware_version       | character varying(25)       | 
+ ads_app_id             | character varying(25)       | 
+ user_agent             | character varying(25)       | 
+ ip_address             | character varying(16)       | 
+ min                    | character varying(15)       | 
+ brew_platform_id       | integer                     | 
+ brew_class_id          | character varying(20)       | 
+ brew_price_type        | integer                     | 
+ os                     | character varying(25)       | 
+ gps                    | integer                     | 
+ product_name           | character varying(50)       | 
+ version                | character varying(20)       | 
+ connection_name        | bytea                       | not null
+ request_time           | timestamp without time zone | not null
+ wait_time              | numeric                     | not null
+ client_session         | bigint                      | 
+ gwsubid                | character varying(64)       | 
+ sms_format_version     | integer                     | 
+ sms_app_port           | integer                     | 
+ sms_app_prefix         | character varying(20)       | 
+ subscription_version   | integer                     | 
+ global_capable         | character varying(5)        | 
+ new_user               | boolean                     | 
+ user_id                | integer                     | 
+ client_id              | integer                     | 
+ platform               | character varying(10)       | 
+Indexes:
+    "accepted_iden_details_pkey" PRIMARY KEY, btree (id)
+    "accepted_iden_details_t_idx" btree ("time")
+    "aid_mdn_idx" btree (mdn)
+
+
+mon=> \d tps_servlet_reply_events
+                                          Table "public.tps_servlet_reply_events"
+        Column        |            Type             |                               Modifiers                               
+----------------------+-----------------------------+-----------------------------------------------------------------------
+ id                   | bigint                      | not null default nextval('tps_servlet_reply_events_id_seq'::regclass)
+ hostname             | character varying(100)      | not null
+ ctime                | timestamp without time zone | not null default now()
+ time                 | timestamp without time zone | not null
+ connection_name_hash | character varying(32)       | 
+ mdn                  | character varying(20)       | 
+ transaction_id       | character varying(32)       | 
+ request_time         | timestamp without time zone | not null
+ wait_time            | numeric                     | not null
+ template_library     | bytea                       | not null
+ query_name           | character varying(50)       | not null
+ query_id             | integer                     | not null
+ reply_sexp           | text                        | 
+ reply_flags          | integer                     | not null
+ body_length          | integer                     | not null
+ module_name          | character varying(50)       | 
+ product_name         | character varying(50)       | not null
+ version              | character varying(32)       | not null
+ public_query         | boolean                     | 
+Indexes:
+    "tps_servlet_reply_events_pkey" PRIMARY KEY, btree (id)
+    "tps_servlet_reply_events_t_idx" btree ("time")
+
+
+	
+	
+-------------------- CREATE ----------------------------------------------------------------------------------------------------------\
+create table Employee(
+    ID                 VARCHAR2(4 BYTE)         NOT NULL,
+    First_Name         VARCHAR2(10 BYTE),
+    Last_Name          VARCHAR2(10 BYTE),
+    Start_Date         DATE,
+    End_Date           DATE,
+    Salary             Number(8,2),
+    City               VARCHAR2(10 BYTE),
+    Description        VARCHAR2(15 BYTE)
+  )
+
+
+-------------------- COUNT ----------------------------------------------------------------------------------------------------------\
+select count(*) from employee;
+-------------------------------------------------------------------------------------------------------------------------------------------------\
+
+--------------------- SELECT ---------------------------------------------------------------------------------------------------------------------\
+
+--  TIME -----------------------------
+SELECT * FROM `dt_tb` WHERE year( dt2 ) between 2004 and 2005
+SELECT * FROM `dt_tb` WHERE month(dt) between '02' and '08'
+SELECT * FROM `dt_tb` WHERE month(dt) between '02' and '08' and year(dt) between 2004 and 2005
+SELECT * FROM `dt_tb` WHERE dt BETWEEN '2005-01-01' AND '2005-12-31' 
+
+
+SELECT connection_name_hash, mdn, product_name, credential, platform  FROM accepted_iden_details WHERE product_name='nbisdk' AND mdn='9496484280' LIMIT(2);
+SELECT connection_name_hash, mdn, product_name, query_name FROM tps_servlet_reply_events WHERE mdn='9496484280' LIMIT(2);
+SELECT a.connection_name_hash, a.mdn, a.product_name, a.credential, a.platform, t.query_name, a.time FROM accepted_iden_details as a, tps_servlet_reply_events as t WHERE a.connection_name_hash = t.connection_name_hash AND a.mdn=t.mdn AND a.product_name = t.product_name AND a.mdn='9496484280' ORDER BY a.time DESC LIMIT(2);
+SELECT a.connection_name_hash, a.mdn, a.product_name, a.credential, a.platform, t.query_name, a.time FROM accepted_iden_details as a, tps_servlet_reply_events as t WHERE a.connection_name_hash = t.connection_name_hash AND a.mdn=t.mdn AND a.product_name = t.product_name AND a.mdn='9496484280' ORDER BY a.time DESC LIMIT(2);
+SELECT connection_name_hash, mdn, product_name, credential, platform, time FROM accepted_iden_details WHERE product_name='nbisdk' AND mdn='9496484280' and time BETWEEN '2010-11-10' AND '2010-12-06' ORDER by time desc LIMIT(2);
+SELECT connection_name_hash, mdn, product_name, credential, platform, time FROM accepted_iden_details WHERE product_name='nbisdk' AND mdn='9496484280' ORDER BY time DESC LIMIT(2);
+SELECT a.connection_name_hash, a.mdn, a.product_name, a.credential, a.platform, t.query_name, a.time FROM accepted_iden_details as a, tps_servlet_reply_events as t WHERE a.connection_name_hash = t.connection_name_hash AND a.mdn='9496484280' ORDER BY a.time DESC LIMIT(5);
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT connection_name_hash, count(*) as row_count, count(distinct credential) as cred_count FROM accepted_iden_details GROUP BY 1 HAVING COUNT(distinct credential) > 1;
+SELECT a.connection_name_hash, a.mdn, a.product_name, a.credential, a.platform, t.query_name, a.time, t.time FROM accepted_iden_details as a, tps_servlet_reply_events as t WHERE a.connection_name_hash = t.connection_name_hash AND a.mdn=t.mdn AND a.product_name = t.product_name AND a.mdn='9496484280' AND (query_name='reverse-geocode-query' OR query_name='geocode-query') ORDER BY t.time DESC LIMIT(6);
+
+--------------------- DROP ---------------------------------------------------------------------------------------------------------------------\
+drop table Employee
+
+
+
+
+Test Harness
+details.mdn = 9496484280
+details.platform = android
+details.product: nbisdk
+details.version = 1.5.0.795
+details.credential = Nn0mIcp3oV8FdhemNFBvTjyCHfJtjCVneitnz3cP
+connection_name_hash = a20b2ee6622e2fe83b77ff0ed257bab5
+
+Map Sample
+details.mdn = 9496484280
+details.platform = android
+details.product = nbisdk
+details.version = 1.5.0.690
+details.credential = RnG7H/2pzq9lUuG348jDOpN4J+tV1P7B5q1Q/UEF
+connection_name_hash = 94117399d634b1c46958b857632d7dcd
+
+
+
+
+TESTED
+//depot/nbserver/nim/tesla/voltron5/main/sql/mon_db/accepted_iden_details.sql  GLOBAL_CAPABLE VARCHAR(5), is presented
+//depot/nbserver/nim/tesla/voltron5/main/pylib/servlet/tps/protosubr/iden.py  - nothing
+
+In this case the iden_accepted_detail doesn’t work.
+1)	Go to /nb/nbevent/evsys
+2)	watch -d ls -lrt accepted_iden_details/
+3)	run the system test like python -O /nb/nbserver/test/system/servlets/test_iden.py
+4)	you can see that watch -d ls -lrt accepted_iden_details   has been changed.
+5)	The step 4 means that mondb doen’t receive anything
+
+
+
+
